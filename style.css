@@ -1,0 +1,115 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+body {
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+        background-color: rgb(26, 25, 25);
+        font-family: 'Lato', sans-serif;
+    }
+
+.clock {
+
+    display: flex;
+}
+
+.flip_clock {
+    position: relative;
+    width: 40px;
+    height: 100px;
+    margin: 1px;
+    font-size: 35px;
+    line-height: 100px;
+    text-align: center;
+    border: 1px solid white;
+
+}
+
+.digital::before,
+.digital::after {
+    position: absolute;
+    content: attr(data-number);
+    left: 0;
+    right: 0;
+    color: white;
+    background: black;
+    overflow: hidden;
+ 
+}
+
+
+
+.digital::after {
+    top: 50%;
+    bottom: 0;
+    line-height: 0;
+    border-radius: 0 0 10px 10px;
+}
+
+.digital.front::after,
+.digital.back::before {
+    z-index: 1;
+}
+
+.digital.back::after {
+
+    transform-origin: top center;
+
+    transform: rotateX(0.5turn);
+    z-index: 2;
+}
+
+.digital.front::before {
+    z-index: 3;
+}
+
+.divider {
+    font-size: 66px;
+    line-height: 102px;
+    font-style: normal;
+    color: white;
+}
+
+.flip.running .front::before {
+
+    transform-origin: center bottom;
+
+    animation: frontFlipDown 0.6s ease-in-out;
+
+    backface-visibility: hidden;
+}
+
+.flip.running .back::after {
+
+    animation: backFlipDown 0.6s ease-in-out;
+}
+
+@-webkit-keyframes frontFlipDown {
+    to {
+
+        transform: rotateX(0.5turn);
+    }
+}
+
+@keyframes frontFlipDown {
+    to {
+
+        transform: rotateX(0.5turn);
+    }
+}
+
+@-webkit-keyframes backFlipDown {
+    to {
+
+        transform: rotateX(0);
+    }
+}
+
+@keyframes backFlipDown {
+    to {
+
+        transform: rotateX(0);
+    }
+}
